@@ -27,18 +27,17 @@ function setup() {
     engine.gravity.y = 1;
     // Set up collision detection for point scoring
     function collision(event){
-        console.log(event);
-        // var pairs = event.pairs;
-        // for (var i = 0; i < pairs.length; i++){
-        //     var labelA = pairs[i].bodyA.label;
-        //     var labelB = pairs[i].bodyB.label;
-        //     if (labelA == 'ball' && labelB == 'ball'){
-        //         console.log('two balls collided');
-        //     }
-        // }
+        // console.log(event.pairs[0]);
+        var pairs = event.pairs;
+        for (var i = 0; i < pairs.length; i++){
+            var pair = pairs[i];
+            var peg = pair.bodyA.label == "peg" ? pair.bodyA : pair.bodyB;
+            console.log(peg)
+            peg.render.fillStyle = '#060a19'
+        }
     }
     // Assign a 'collisionStart' event in this engine to the function
-    Events.on(engine, 'collisionStart', collision);
+    Events.on(engine, "collisionStart", collision);
     // Spawn first ball (only here so ball at very start, remove when spawning balls based on gifts)
     newBall();
     // Define spacing of columns and rows
@@ -110,8 +109,9 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 15 == 0) {
-        newBall();
+    if (frameCount % 30 == 0) {
+        addBallToBuffer();
+        newBall()
     }
     background(51);
     // Update the engine (second arg is time step variable default = 16.666)
