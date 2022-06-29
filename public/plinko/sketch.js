@@ -10,16 +10,17 @@ var ballBuffer = [];
 var balls = [];
 var pegs = [];
 var bounds = [];
+var buckets = [];
 var cols = 11;
 var rows = 10;
-var nLayers = 7;
+var nLayers = 8;
 
 
 
 // Setup engine
 function setup() {
     // Define canvas size (game window)
-    createCanvas(600, 700);
+    createCanvas(750, 650);
     // Define engine and create world
     engine = Engine.create();
     world = engine.world;
@@ -63,13 +64,22 @@ function setup() {
         startPosY += spacingY;
         nPegs += 1
     }
-
-    
+    // Place scoring buckets
+    bucketSpacing = 10;
+    for (var i = 0 ; i < nPegs - 2; i++) {
+        var x = startPosX + spacing + (i*spacing);
+        var y = startPosY - spacingY + 50;
+        var h = 50;
+        var w = 60;
+        var bucket = new Bucket(x,y,w,h);
+        buckets.push(bucket);
+    }
+    // Place bucket boundaries
     var b = new Boundary(width/2, height + 50, width, 100 );
     bounds.push(b);
     for (var i = 0 ; i < nPegs + 1; i++) {
         var x = startPosX + (0.5*spacing) + (i * spacing);
-        var h = 200;
+        var h = 50;
         var w = 10;
         var y = height - h / 2;
         var b = new Boundary(x,y,w,h);
@@ -85,7 +95,7 @@ function getRandomFloat(min, max, decimals) {
 
 // Function spawns a new ball
 function addBallToBuffer(){
-    var p = new Ball(300 + getRandomFloat(-10, 10, 2), 10, 16);
+    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16);
     // push the new ball into ball array
     ballBuffer.push(p);
 }
@@ -121,6 +131,10 @@ function draw() {
     // Draw pegs into world
     for (var i = 0; i < pegs.length; i++) {
         pegs[i].show();
+    }
+    // Draw buckets into world
+    for (var i = 0; i < buckets.length; i++) {
+        buckets[i].show();
     }
     // Draw boundaries into world
     // The boundaries should help stop a ball triggering multiple buckets
