@@ -3,12 +3,17 @@ function Peg(x, y, r) {
     var options = {
         isStatic: true,
         restitution: 4,
-        friction: 0
+        friction: 0,
+        collisionFilter: {
+            category: 0x0001,
+            mask: 0x0010
+        }
     }
     // Create particle
     this.body = Bodies.circle(x,y,r, options);
     // Set object ID for collision detection
     this.body.label = "peg";
+
     // Circle doesnt keep track of radius so add radius property
     this.r = r;
     // Tell the particle to be in the world
