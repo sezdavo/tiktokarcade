@@ -3,17 +3,17 @@ function Ball(x, y, r) {
     var options = {
         restitution: 0.6,
         friction: 0.2,
+        wireframes: false,
         collisionFilter: {
             category: 0x0010,
             mask: 0x0001
-        }
+        },
     }
     // Create particle
     this.body = Bodies.circle(x,y,r, options);
     // Set object ID for collision detection
     this.body.label = "ball";
     // set collision properties
-x
     // Circle doesnt keep track of radius so add radius property
     this.r = r;
     // Tell the particle to be in the world

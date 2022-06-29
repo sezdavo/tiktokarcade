@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TikTok LIVE Chat Reader (Plinko)</title>
 
-    <meta name="description" content="A chat reader for TikTok LIVE utilizing TikTok-Live-Connector and Socket.IO to forward the data to the client. This demo project uses the unofficial TikTok API to retrieve chat comments, gifts and other events from TikTok LIVE.">
-    <meta name="keywords" content="TikTok,Live,Livestream,Chat,Reader,Scraper,Tracker,tiktok.com,broadcast,api,library,node,node.js,javascript">
+    <meta name="description"
+        content="A chat reader for TikTok LIVE utilizing TikTok-Live-Connector and Socket.IO to forward the data to the client. This demo project uses the unofficial TikTok API to retrieve chat comments, gifts and other events from TikTok LIVE.">
+    <meta name="keywords"
+        content="TikTok,Live,Livestream,Chat,Reader,Scraper,Tracker,tiktok.com,broadcast,api,library,node,node.js,javascript">
 
     <link rel="stylesheet" href="style.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
 
     <script src="connection.js"></script>
     <script src="app.js"></script>
@@ -20,14 +25,18 @@
     <script language="javascript" type="text/javascript" src="plinko/libraries/matter.js"></script>
     <script language="javascript" type="text/javascript" src="plinko/libraries/p5.js"></script>
 </head>
+
 <body>
     <div class="head">
         <h1>TikTok LIVE Chat Reader Plinko</h1>
-        <span class="subTitle">Source: <a href="https://github.com/zerodytrash/TikTok-Chat-Reader">https://github.com/zerodytrash/TikTok-Chat-Reader</a></span>      
+        <span class="subTitle">Source: <a
+                href="https://github.com/zerodytrash/TikTok-Chat-Reader">https://github.com/zerodytrash/TikTok-Chat-Reader</a></span>
     </div>
 
     <div>
-        A chat reader for <a href="https://www.tiktok.com/live">TikTok LIVE</a> utilizing <a href="https://github.com/zerodytrash/TikTok-Live-Connector">TikTok-Live-Connector</a> and <a href="https://socket.io/">Socket.IO</a> to forward the data to the client.
+        A chat reader for <a href="https://www.tiktok.com/live">TikTok LIVE</a> utilizing <a
+            href="https://github.com/zerodytrash/TikTok-Live-Connector">TikTok-Live-Connector</a> and <a
+            href="https://socket.io/">Socket.IO</a> to forward the data to the client.
     </div>
 
     <div class="inputFields">
@@ -37,6 +46,7 @@
     </div>
     <div>
         <h1>Plinko Board:</h1>
+        <script language="javascript" type="text/javascript" src="plinko/pegPop.js"></script>
         <script language="javascript" type="text/javascript" src="plinko/sketch.js"></script>
         <script language="javascript" type="text/javascript" src="plinko/ball.js"></script>
         <script language="javascript" type="text/javascript" src="plinko/peg.js"></script>
@@ -68,4 +78,5 @@
         </tr>
     </table>
 </body>
+
 </html>
