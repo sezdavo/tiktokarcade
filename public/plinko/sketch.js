@@ -5,6 +5,7 @@ var Engine = Matter.Engine,
 
 var engine;
 var world;
+var ballBuffer = [];
 var balls = [];
 var pegs = [];
 var bounds = [];
@@ -39,15 +40,29 @@ function setup() {
     var b = new Boundary(width/2, height + 50, width, 100 );
 }
 
+function getRandomFloat(min, max, decimals) {
+    const str = (Math.random() * (max - min) + min).toFixed(decimals);
+  
+    return parseFloat(str);
+  }
+
 // Function spawns a new ball
-function newBall(){
-    var p = new Ball(300, 10, 10);
-    balls.push(p);
+function addBallToBuffer(){
+    var p = new Ball(300 + getRandomFloat(-10, 10, 2), 10, 8);
+    ballBuffer.push(p);
 }
  
+function newBall(){
+    if(ballBuffer.length > 0){
+        let ball = ballBuffer[0]
+        ball.addToWorld()
+        balls.push(ball)
+        ballBuffer.shift()
+    }
+}
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 60 == 0) {
+    if (frameCount % 15 == 0) {
         newBall();
     }
     background(51);

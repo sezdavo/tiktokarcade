@@ -1,3 +1,5 @@
+// import {newBall} from './plinko/sketch'
+
 // This will use the demo backend if you open index.html locally via file://, otherwise your server will be used
 let backendUrl = location.protocol === 'file:' ? "https://tiktok-chat-reader.zerody.one/" : undefined;
 let connection = new TikTokIOConnection(backendUrl);
@@ -6,7 +8,8 @@ let connection = new TikTokIOConnection(backendUrl);
 let viewerCount = 0;
 let likeCount = 0;
 let diamondsCount = 0;
-
+let cooldown = {}
+let cooldownPeriod = 15 * 1000;
 $(document).ready(() => {
     $('#connectButton').click(connect);
     $('#uniqueIdInput').on('keyup', function (e) {
@@ -15,6 +18,29 @@ $(document).ready(() => {
         }
     });
 })
+
+function cleanCooldown(now){
+    cooldown = Object.entries(cooldown).filter(([key, value])=> abs(value-now) > 2*cooldownPeriod)
+}
+function addBallFromLike({userId, nickname}){
+    let now = new Date
+    let lastLike = cooldown[userId] || null
+    if((lastLike && abs(now - lastLike)>cooldownPeriod) | !lastLike){
+        cooldown[userId] = now
+        console.log("Adding new ball for " + nickname)
+        addBallToBuffer()
+
+        // cleanCooldown()
+    }else{
+        console.log("Trottled " + nickname)
+    }
+}
+
+function addBallFromGift({userId, giftId, diamondCount}){
+    for (let i = 0; i < diamondCount; i++) {
+       addBallToBuffer() 
+    }
+}
 
 function connect() {
     let uniqueId = $('#uniqueIdInput').val();
@@ -146,6 +172,7 @@ connection.on('roomUser', (msg) => {
 // like stats
 connection.on('like', (msg) => {
     if (typeof msg.likeCount === 'number') {
+        addBallFromLike(msg)
         addChatItem('#447dd4', msg, msg.label.replace('{0:user}', '').replace('likes', `${msg.likeCount} likes`))
     }
 
@@ -177,6 +204,7 @@ connection.on('chat', (msg) => {
 
 // New gift received
 connection.on('gift', (data) => {
+    addBallFromGift(data)
     addGiftItem(data);
 
     if (!isPendingStreak(data) && data.diamondCount > 0) {

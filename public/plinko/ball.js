@@ -2,16 +2,16 @@ function Ball(x, y, r) {
     // Create additional options for object
     var options = {
         restitution: 0.5,
-        friction: 0
+        friction: 0.2
     }
     // Create particle
     this.body = Bodies.circle(x,y,r, options);
     // Circle doesnt keep track of radius so add radius property
     this.r = r;
     // Tell the particle to be in the world
+}
+Ball.prototype.addToWorld = function(){
     World.add(world, this.body);
-
-
 }
 // Create function that deletes balls that fall off screen
 Ball.prototype.isOffScreen = function() {
