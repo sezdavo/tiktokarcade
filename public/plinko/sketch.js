@@ -31,14 +31,13 @@ function setup() {
 
     // Set up collision detection for point scoring
     function collision(event){
-        console.log(event.pairs[0]);
+        // console.log(event.pairs[0]);
         var pairs = event.pairs;
         for (var i = 0; i < pairs.length; i++){
             var pair = pairs[i];
             var peg = pair.bodyA.label == "peg" ? pair.bodyA : pair.bodyB;
-            console.log(peg)
+            // console.log(peg)
             peg.render.fillStyle = '#060a19'
-        } 
             if(peg.id <= pegsPop.length){
                 pegsPop[parseInt(peg.id)-1].startPopping()
             }
@@ -46,7 +45,7 @@ function setup() {
         }
     }
     // Assign a 'collisionStart' event in this engine to the function
-    // Events.on(engine, "collisionStart", collision);
+    Events.on(engine, "collisionStart", collision);
     // Spawn first ball (only here so ball at very start, remove when spawning balls based on gifts)
     newBall();
     // Define spacing of columns and rows
