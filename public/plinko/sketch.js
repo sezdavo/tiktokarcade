@@ -5,10 +5,12 @@ var Engine = Matter.Engine,
     Bodies = Matter.Bodies;
 
 var engine;
+var render;
 var world;
 var ballBuffer = [];
 var balls = [];
 var pegs = [];
+var pegsPop = [];
 var bounds = [];
 var buckets = [];
 var cols = 11;
@@ -25,6 +27,7 @@ function setup() {
     engine = Engine.create();
     world = engine.world;
     engine.gravity.y = 1;
+
     // Set up collision detection for point scoring
     function collision(event){
         console.log(event.pairs[0]);
@@ -35,6 +38,11 @@ function setup() {
             console.log(peg)
             peg.render.fillStyle = '#060a19'
         } 
+            if(peg.id <= pegsPop.length){
+                pegsPop[parseInt(peg.id)-1].startPopping()
+            }
+
+        }
     }
     // Assign a 'collisionStart' event in this engine to the function
     // Events.on(engine, "collisionStart", collision);
@@ -58,6 +66,7 @@ function setup() {
             var p = new Peg(x, y, 8);
             // push the new object into peg array
             pegs.push(p);
+            pegsPop.push(new PegPop(x,y,8))
         }
         startPosX = startPosX - (0.5 * spacing);
         startPosY += spacingY;
@@ -119,7 +128,7 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 30 == 0) {
+    if (frameCount % 60 == 0) {
         addBallToBuffer();
         newBall()
     }
@@ -140,6 +149,7 @@ function draw() {
     }
     // Draw pegs into world
     for (var i = 0; i < pegs.length; i++) {
+        pegsPop[i].pop(frameCount)
         pegs[i].show();
     }
     // Draw buckets into world

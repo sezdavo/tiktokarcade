@@ -7,7 +7,7 @@ function Peg(x, y, r) {
         collisionFilter: {
             category: 0x0001,
             mask: 0x0010
-        }
+        },
     }
     // Create particle
     this.body = Bodies.circle(x,y,r, options);
@@ -19,12 +19,11 @@ function Peg(x, y, r) {
     // Tell the particle to be in the world
     World.add(world, this.body);
 
-
 }
 
 // Give all particles a show function
 Peg.prototype.show = function() {
-    fill(0, 255, 00);
+    fill(255, 255, 255);
     stroke(255);
     var pos = this.body.position;
     push();
