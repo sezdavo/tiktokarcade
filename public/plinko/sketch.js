@@ -27,17 +27,17 @@ function setup() {
     engine.gravity.y = 1;
     // Set up collision detection for point scoring
     function collision(event){
-        // console.log(event.pairs[0]);
+        console.log(event.pairs[0]);
         var pairs = event.pairs;
         for (var i = 0; i < pairs.length; i++){
             var pair = pairs[i];
             var peg = pair.bodyA.label == "peg" ? pair.bodyA : pair.bodyB;
             console.log(peg)
             peg.render.fillStyle = '#060a19'
-        }
+        } 
     }
     // Assign a 'collisionStart' event in this engine to the function
-    Events.on(engine, "collisionStart", collision);
+    // Events.on(engine, "collisionStart", collision);
     // Spawn first ball (only here so ball at very start, remove when spawning balls based on gifts)
     newBall();
     // Define spacing of columns and rows
@@ -63,7 +63,11 @@ function setup() {
         startPosY += spacingY;
         nPegs += 1
     }
-    // Place scoring buckets
+    // Define ball score processing function
+    function processBall(event){
+        console.log(event);
+    }
+    // Place SCORING BUCKETS
     bucketSpacing = 10;
     for (var i = 0 ; i < nPegs - 2; i++) {
         var x = startPosX + spacing + (i*spacing);
@@ -71,8 +75,14 @@ function setup() {
         var h = 50;
         var w = 60;
         var bucket = new Bucket(x,y,w,h);
+        // Events.on(bucket, 'ballScored', processBall);
         buckets.push(bucket);
     }
+    // console.log(buckets[0])
+    // Events.on(bucket[0], 'ballScored', processBall);
+    // for (var i = 0; i < buckets.length; i++){
+    //     Events.on(bucket[i], 'ballScored', processBall);
+    // }
     // Place bucket boundaries
     var b = new Boundary(width/2, height + 50, width, 100 );
     bounds.push(b);
