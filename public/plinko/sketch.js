@@ -3,6 +3,7 @@ var Engine = Matter.Engine,
     World = Matter.World,
     Events = Matter.Events,
     Bodies = Matter.Bodies;
+    Render = Matter.Render;
 
 var engine;
 var render;
