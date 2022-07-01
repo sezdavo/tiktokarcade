@@ -27,18 +27,18 @@ function addBallFromLike({userId, nickname}){
     let lastLike = cooldown[userId] || null
     if((lastLike && abs(now - lastLike)>cooldownPeriod) | !lastLike){
         cooldown[userId] = now
-        console.log("Adding new ball for " + nickname)
+        //console.log("Adding new ball for " + nickname)
         addBallToBuffer()
 
         // cleanCooldown()
     }else{
-        console.log("Trottled " + nickname)
+        //console.log("Trottled " + nickname)
     }
 }
 
 function addBallFromGift({userId, giftId, diamondCount}){
     for (let i = 0; i < diamondCount; i++) {
-       addBallToBuffer() 
+        addBallToBuffer() 
     }
 }
 

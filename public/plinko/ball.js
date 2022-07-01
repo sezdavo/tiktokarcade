@@ -9,11 +9,14 @@ function Ball(x, y, r) {
             mask: 0x0001
         },
     }
-    // Create particle
+    // Create ball body
     this.body = Bodies.circle(x,y,r, options);
     // Set object ID for collision detection
     this.body.label = "ball";
-    // set collision properties
+    // Set isScored value to ball to remove ball once scored
+    this.body.isScored = false;
+    // Set username property for scoring
+    this.body.username = null;
     // Circle doesnt keep track of radius so add radius property
     this.r = r;
     // Tell the particle to be in the world
