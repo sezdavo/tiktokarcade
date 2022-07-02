@@ -83,18 +83,14 @@ function setup() {
                 });
                 // Create a new array with only the first 5 items (top 5 leaders)
                 leaderboard = scores.slice(0, 5);
-                console.log(leaderboard)
-                
+                // Build front end leaderboard
+                // Loop through all players in leaderboard and update username + points
+                for (i=0; i < leaderboard.length; i++){
+                    document.querySelectorAll(".player")[i].querySelector('.username').innerHTML = leaderboard[i][0];
+                    document.querySelectorAll(".player")[i].querySelector('.points').innerHTML = leaderboard[i][1];
+                }
+                // Assign 'isScored' property to ball so that world can remove it from game
                 ball.isScored = true;
-                // console.log(bucket.value.toString().concat(" ", 'points scored by ', ball.username));
-                //console.log(leaderboard);
-                // console.log(bucketCounters)
-                // bucket.render.fillStyle = '#060a19'
-                // if(bucket.id <= bucketsPop.length){
-                //     bucketsPop[parseInt(bucket.id)-1].startPopping()
-                // }
-                // Log below to see distribution 
-                // console.log(bucketCounters);
             }
             
 
