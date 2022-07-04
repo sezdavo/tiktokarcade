@@ -18,17 +18,18 @@ var bucketsPop = [];
 var cols = 11;
 var rows = 10;
 var nLayers = 8;
+
+var mask;
 var bucketIDs = [];
 var bucketValues = [10,5,3,1,0,1,3,5,10];
 var bucketCounters = [0,0,0,0,0,0,0,0,0];
 var scoreboard = {};
 var randPlayers = ['playerA', 'playerB', 'playerC', 'playerD', 'playerE',]
 
-
-
 // Setup engine
 function setup() {
     // Define canvas size (game window)
+
     var canvas = createCanvas(750, 550);
     canvas.parent('game-canvas');
 
@@ -43,6 +44,11 @@ function setup() {
         var pairs = event.pairs;
         for (var i = 0; i < pairs.length; i++){
             var pair = pairs[i];
+
+            var peg = pair.bodyA.label == "peg" ? pair.bodyA : pair.bodyB;
+            if(peg.id <= pegsPop.length){
+                pegsPop[parseInt(peg.id)-1].startPopping()
+                
             // IF statement for collision type handling
             // Option 1 is ball and peg, Option 2 is ball and bucket
             // Check if option 1, else assume option 2
@@ -121,7 +127,7 @@ function setup() {
             var p = new Peg(x, y, 8);
             // push the new object into peg array
             pegs.push(p);
-            pegsPop.push(new PegPop(x,y,8))
+            pegsPop.push(new PegPop(x,y,8 ))
         }
         startPosX = startPosX - (0.5 * spacing);
         startPosY += spacingY;
@@ -163,12 +169,17 @@ function getRandomFloat(min, max, decimals) {
   }
 
 // Function spawns a new ball
-function addBallToBuffer(){
+
+function addBallToBuffer(profilePictureUrl){
+    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16, profilePictureUrl, mask);
+
+//function addBallToBuffer(){
     // var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16);
-    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), -30, 16);
+    //var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), -30, 16);
     // Add username to ball (randomly selecting between 5 players for testing)
-    p.body.username = randPlayers[getRandomFloat(0,4,0)];
+    // p.body.username = randPlayers[getRandomFloat(0,4,0)];
     // p.body.username = userId;
+
     // push the new ball into ball array
     ballBuffer.push(p);
 }
@@ -183,8 +194,8 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 60 == 0) {
-        addBallToBuffer();
+    if (frameCount % 2 == 0) {
+        // addBallToBuffer();
         newBall()
     }
     background(28,45,55);

@@ -22,13 +22,14 @@ $(document).ready(() => {
 function cleanCooldown(now){
     cooldown = Object.entries(cooldown).filter(([key, value])=> abs(value-now) > 2*cooldownPeriod)
 }
-function addBallFromLike({userId, nickname}){
+function addBallFromLike({userId, nickname, profilePictureUrl}){
     let now = new Date
     let lastLike = cooldown[userId] || null
     if((lastLike && abs(now - lastLike)>cooldownPeriod) | !lastLike){
         cooldown[userId] = now
-        //console.log("Adding new ball for " + nickname)
-        addBallToBuffer()
+
+        console.log("Adding new ball for " + nickname)
+        addBallToBuffer(profilePictureUrl || null)
 
         // cleanCooldown()
     }else{
@@ -36,9 +37,9 @@ function addBallFromLike({userId, nickname}){
     }
 }
 
-function addBallFromGift({userId, giftId, diamondCount}){
+function addBallFromGift({userId, giftId, diamondCount, profilePictureUrl}){
     for (let i = 0; i < diamondCount; i++) {
-        addBallToBuffer() 
+       addBallToBuffer(profilePictureUrl || null) 
     }
 }
 

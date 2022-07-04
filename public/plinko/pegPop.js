@@ -1,5 +1,5 @@
 class PegPop{
-    constructor(x, y, r){
+    constructor(x, y, r ){
         // Circle doesnt keep track of radius so add radius property
         this.r = r;
         this.x = x;
