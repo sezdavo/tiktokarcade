@@ -17,13 +17,13 @@ var buckets = [];
 var cols = 11;
 var rows = 10;
 var nLayers = 8;
-
-
+var mask;
 
 // Setup engine
 function setup() {
     // Define canvas size (game window)
     createCanvas(750, 650);
+    mask = createGraphics(width, height);
     // Define engine and create world
     engine = Engine.create();
     world = engine.world;
@@ -36,8 +36,6 @@ function setup() {
         for (var i = 0; i < pairs.length; i++){
             var pair = pairs[i];
             var peg = pair.bodyA.label == "peg" ? pair.bodyA : pair.bodyB;
-            // console.log(peg)
-            peg.render.fillStyle = '#060a19'
             if(peg.id <= pegsPop.length){
                 pegsPop[parseInt(peg.id)-1].startPopping()
             }
@@ -66,7 +64,7 @@ function setup() {
             var p = new Peg(x, y, 8);
             // push the new object into peg array
             pegs.push(p);
-            pegsPop.push(new PegPop(x,y,8))
+            pegsPop.push(new PegPop(x,y,8 ))
         }
         startPosX = startPosX - (0.5 * spacing);
         startPosY += spacingY;
@@ -112,8 +110,8 @@ function getRandomFloat(min, max, decimals) {
   }
 
 // Function spawns a new ball
-function addBallToBuffer(){
-    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16);
+function addBallToBuffer(profilePictureUrl){
+    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16, profilePictureUrl, mask);
     // push the new ball into ball array
     ballBuffer.push(p);
 }
@@ -128,8 +126,8 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 60 == 0) {
-        addBallToBuffer();
+    if (frameCount % 2 == 0) {
+        // addBallToBuffer();
         newBall()
     }
     background(51);
