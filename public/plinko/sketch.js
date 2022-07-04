@@ -26,10 +26,16 @@ var bucketCounters = [0,0,0,0,0,0,0,0,0];
 var scoreboard = {};
 var randPlayers = ['playerA', 'playerB', 'playerC', 'playerD', 'playerE',]
 var leaderboardElements = [];
+
+const ballRadius = 16;
+// var imageFilter = new Array(ballRadius*2).fill(1).map(() => new Array(ballRadius*2).fill(1));
+var imageFilter; 
 // Setup engine
 function setup() {
     // Define canvas size (game window)
 
+    calcImageFilter()
+    console.log(imageFilter)
     var canvas = createCanvas(750, 550);
     canvas.parent('game-canvas');
 
@@ -156,6 +162,25 @@ function setup() {
     
     
 }
+
+function calcImageFilter(){
+    imageFilter = createImage(ballRadius*2, ballRadius*2)
+    imageFilter.loadPixels();
+    for (let i = 0; i < imageFilter.width; i++) {
+        for (let j = 0; j < imageFilter.height; j++) {
+            let dist = Math.sqrt(abs(i-ballRadius+1)**2 + abs(j-ballRadius+1)**2)
+            let alpha = dist <= ballRadius ? 255 : 0
+            imageFilter.set(i, j, color(0, 90, 102, alpha));
+        }
+    }
+    imageFilter.updatePixels();
+    // for (let x = 0; x < ballRadius*2; x++) {
+    //     for (let y = 0; y < ballRadius*2; y++) {
+    //         let dist = Math.sqrt(abs(x-ballRadius)**2 + abs(y-ballRadius)**2)
+    //         imageFilter[x][y] = dist <= ballRadius ? 0 : 255;    
+    //     } 
+    // }
+}
 function updateLeaderboard(){
     // Update leaderboard
     // // Create array of all items in scoreboard in format [key, value]
@@ -184,9 +209,9 @@ function getRandomFloat(min, max, decimals) {
 // Function spawns a new ball
 
 function addBallToBuffer(profilePictureUrl, username){
-    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16, profilePictureUrl, mask);
+    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, ballRadius, profilePictureUrl, mask);
 
-    // p.body.username = userId;
+    p.body.username = username;
 
     // push the new ball into ball array
     ballBuffer.push(p);
@@ -202,8 +227,8 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 4 == 0) {
-        addBallToBuffer();
+    if (frameCount % 3 == 0) {
+        // addBallToBuffer();
         newBall()
     }
     background(28,45,55);
