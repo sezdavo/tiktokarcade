@@ -48,6 +48,9 @@ class PegPop{
             this.scaleFactor = 1
             this.popping = false
         }
+        if(this.scaleFactor > this.maxScaleFactor){
+            this.scaleFactor = this.maxScaleFactor
+        }
     
         pop();
     

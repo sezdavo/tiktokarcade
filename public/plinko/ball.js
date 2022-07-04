@@ -35,9 +35,18 @@ class Ball{
     loadImage(){
         if(this.img == null && this.profilePictureUrl){
             this.img = loadImage(this.profilePictureUrl)
+            this.img.resize(this.r*2, this.r*2)
         }
 
     }
+    rotate_and_draw_image(img_x, img_y, img_width, img_height, img_angle){
+        imageMode(CENTER);
+        translate(img_x+img_width/2, img_y+img_width/2);
+        rotate(img_angle);
+        image(this.img, 0, 0, img_width, img_height);
+        translate(-(img_x+img_width/2), -(img_y+img_width/2));
+        imageMode(CORNER);
+      }
     // Give all particles a show function
     show () {
         
@@ -49,12 +58,17 @@ class Ball{
             translate(pos.x, pos.y);
             ellipse(0,0, this.r*2);
             pop();
-            return
         }else {
+            push()
             this.loadImage()
             // this.mask.ellipse(pos.x, pos.y, this.r)
             // this.img.mask(this.mask)
-            image(this.img, pos.x-this.r, pos.y-this.r, 2*this.r, 2*this.r)
+            this.img.mask(imageFilter) 
+            this.rotate_and_draw_image(pos.x-this.r, pos.y-this.r, 2*this.r, 2*this.r, this.body.angle)
+            // imageMode(CENTER);
+            // rotate(this.body.angle)
+            // image(this.img, pos.x-this.r, pos.y-this.r, 2*this.r, 2*this.r)
+            pop()
         }
     }
 }
