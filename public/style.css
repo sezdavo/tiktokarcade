@@ -78,3 +78,100 @@ a {
     width: 50px;
     margin-right: 10px;
 }
+
+/* Formatting all phone layout elements */
+
+.top-banner{
+    width: 750px;
+    height:100px;
+    background-color: #1c2d37;
+}
+#game-canvas{
+    padding-bottom:0;
+    margin-bottom: 0;
+}
+.game-canvas {
+    width: 750px;
+    height: 650px;
+}
+.notification-banner{
+    width: 750px;
+    height: 100px;
+    background-color: #1c2d37;
+    padding-top: 15px;
+
+}
+.notification{
+    height: 60px;
+    width: max-content;
+    background-color: #586973;
+    border-radius: 35px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+    margin: 0 auto;
+    padding-left: 10px;
+}
+.chat-background {
+    width: 750px;
+    height: 450px;
+    background-color: #1c2d37;
+      
+}
+
+.leaderboard {
+    width: 300px;
+    position: relative;
+    float: right;  
+    background-color: #586973;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 10px;
+}
+.leaderboard-title{
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #1c2d37;
+    border-radius: 30px;
+}
+/* Formatting table elements */
+table.leaders{
+    margin-top: 20px;
+    width: 300px;
+    table-layout:fixed;
+    border: 1px;
+
+}
+td#icon {
+    width: 70px;
+    align-content: right;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    color: #1c2d37;
+}
+td.username {
+    width: 130px;
+    font-size: 30px;
+    overflow: hidden;
+    font-weight: bolder;
+    color: #1c2d37;
+}
+td.points {
+    width: 70px;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+    color: #fed00b;
+    text-align: center;
+}
+
+
+.bottom-banner {
+    width: 750px;
+    height:100px;
+    background-color: #1c2d37;
+}

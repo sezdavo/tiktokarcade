@@ -27,12 +27,13 @@ function addBallFromLike({userId, nickname, profilePictureUrl}){
     let lastLike = cooldown[userId] || null
     if((lastLike && abs(now - lastLike)>cooldownPeriod) | !lastLike){
         cooldown[userId] = now
+
         console.log("Adding new ball for " + nickname)
         addBallToBuffer(profilePictureUrl || null)
 
         // cleanCooldown()
     }else{
-        console.log("Trottled " + nickname)
+        //console.log("Trottled " + nickname)
     }
 }
 
