@@ -28,7 +28,8 @@ Ball.prototype.addToWorld = function(){
 Ball.prototype.isOffScreen = function() {
     var x = this.body.position.x;
     var y = this.body.position.y;
-    return (x < -50 || x > width + 50 || y > height-100);
+    // return (x < -50 || x > width + 50 || y > height-100);
+    return (x < -50 || x > width + 50 || y > height);
 }
 // Give all particles a show function
 Ball.prototype.show = function() {

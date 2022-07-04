@@ -29,7 +29,9 @@ var randPlayers = ['playerA', 'playerB', 'playerC', 'playerD', 'playerE',]
 // Setup engine
 function setup() {
     // Define canvas size (game window)
-    createCanvas(750, 650);
+    var canvas = createCanvas(750, 550);
+    canvas.parent('game-canvas');
+
     // Define engine and create world
     engine = Engine.create();
     world = engine.world;
@@ -106,7 +108,8 @@ function setup() {
     // Use nested loop to iterate through each layer and place corresponding pegs
     // Define starting variables for each layer
     var startPosX = (width / 2 ) - spacing;
-    var startPosY = 80;
+    // var startPosY = 80;
+    var startPosY = 40;
     var nPegs = 3;
     // First iterate through each layer of pegs (Y direction)
     for (var j = 0; j < nLayers; j++) { 
@@ -161,7 +164,8 @@ function getRandomFloat(min, max, decimals) {
 
 // Function spawns a new ball
 function addBallToBuffer(){
-    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16);
+    // var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16);
+    var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), -30, 16);
     // Add username to ball (randomly selecting between 5 players for testing)
     p.body.username = randPlayers[getRandomFloat(0,4,0)];
     // p.body.username = userId;
@@ -183,7 +187,7 @@ function draw() {
         addBallToBuffer();
         newBall()
     }
-    background(51);
+    background(28,45,55);
     // Update the engine (second arg is time step variable default = 16.666)
     Engine.update(engine, 16.666);
     // Draw balls into world

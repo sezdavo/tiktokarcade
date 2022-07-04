@@ -24,6 +24,12 @@
 
     <script language="javascript" type="text/javascript" src="plinko/libraries/matter.js"></script>
     <script language="javascript" type="text/javascript" src="plinko/libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="plinko/pegPop.js"></script>
+    <script language="javascript" type="text/javascript" src="plinko/sketch.js"></script>
+    <script language="javascript" type="text/javascript" src="plinko/ball.js"></script>
+    <script language="javascript" type="text/javascript" src="plinko/peg.js"></script>
+    <script language="javascript" type="text/javascript" src="plinko/boundary.js"></script>
+    <script language="javascript" type="text/javascript" src="plinko/bucket.js"></script>
 </head>
 
 <body>
@@ -45,14 +51,7 @@
         <input type="button" id="connectButton" value="connect">
     </div>
     <div>
-        <div>
-            <script language="javascript" type="text/javascript" src="plinko/pegPop.js"></script>
-            <script language="javascript" type="text/javascript" src="plinko/sketch.js"></script>
-            <script language="javascript" type="text/javascript" src="plinko/ball.js"></script>
-            <script language="javascript" type="text/javascript" src="plinko/peg.js"></script>
-            <script language="javascript" type="text/javascript" src="plinko/boundary.js"></script>
-            <script language="javascript" type="text/javascript" src="plinko/bucket.js"></script>
-        </div>
+        
     </div>
     <table class="splitstatetable">
         <tr>
@@ -79,53 +78,92 @@
             </td>
         </tr>
     </table>
-    <div class="leaderboard">
-        <h1>Plinko Leaderboard:</h1>
-        <div>
-            <table>
-                <tr class="player top-three">
-                    <td id="1st">
-                    </td>
-                    <td class="username">
-                    </td>
-                    <td class="points">
-                    </td>
-                </tr>
-                <tr class="player top-three">
-                    <td id="2nd">
-                    </td>
-                    <td class="username">
-                    </td>
-                    <td class="points">
-                    </td>
-                </tr>
-                <tr class="player top-three">
-                    <td id="3rd">
-                    </td>
-                    <td class="username">
-                    </td>
-                    <td class="points">
-                    </td>
-                </tr>
-                <tr class="player rest">
-                    <td id="4th">
-                    </td>
-                    <td class="username">
-                    </td>
-                    <td class="points">
-                    </td>
-                </tr>
-                <tr class="player rest">
-                    <td id="5th">
-                    </td>
-                    <td class="username">
-                    </td>
-                    <td class="points">
-                    </td>
-                </tr>
-            </table>
+    <div class="phone-screen">
+        <h1>Streaming Window:</h1>
+        <div class="top-banner">
+            Top Banner
+        </div>
+        <div id="game-canvas">
+            
+        </div>
+        <div class="notification-banner">
+            <div class="notification">
+                *insert notification here*
+            </div>
+        </div>
+        <div class="chat-background">
+            Chat Background
+        
+            <div class="leaderboard">
+                <div class="leaderboard-title">
+                    Leaderboard &#128293;
+                </div>
+                <div>
+                    <table class="leaders">
+                        <tr class="player top-three">
+                            <td id="icon">
+                                <img src="images/medal1.png" alt="" border=0 height=50 width=50></img>
+                            </td>
+                            <td class="username">
+                                player
+                            </td>
+                            <td class="points">
+                                0
+                            </td>
+                        </tr>
+                        <tr class="player top-three">
+                            <td id="icon">
+                                <img src="images/medal2.png" alt="" border=0 height=40 width=40></img>
+                            </td>
+                            <td class="username">
+                                player
+                            </td>
+                            <td class="points">
+                                0
+                            </td>
+                        </tr>
+                        <tr class="player top-three">
+                            <td id="icon">
+                                <img src="images/medal3.png" alt="" border=0 height=40 width=40></img>
+                            </td>
+                            <td class="username">
+                                player
+                            </td>
+                            <td class="points">
+                                0
+                            </td>
+                        </tr>
+                        <tr class="player rest">
+                            <td id="icon">
+                                4.
+                            </td>
+                            <td class="username">
+                                player
+                            </td>
+                            <td class="points">
+                                0
+                            </td>
+                        </tr>
+                        <tr class="player rest">
+                            <td id="icon">
+                                5.
+                            </td>
+                            <td class="username">
+                                player
+                            </td>
+                            <td class="points">
+                                0
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div> 
+        </div>
+        <div class="bottom-banner">
+            Bottom Banner
         </div>
     </div>
+    
 </body>
 
 </html>
