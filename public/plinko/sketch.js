@@ -25,7 +25,7 @@ var bucketValues = [10,5,3,1,0,1,3,5,10];
 var bucketCounters = [0,0,0,0,0,0,0,0,0];
 var scoreboard = {};
 var randPlayers = ['playerA', 'playerB', 'playerC', 'playerD', 'playerE',]
-
+var leaderboardElements = [];
 // Setup engine
 function setup() {
     // Define canvas size (game window)
@@ -38,6 +38,14 @@ function setup() {
     world = engine.world;
     engine.gravity.y = 1;
 
+    for (let i = 0; i < 5; i++) {
+        leaderboardElements.push([
+            document.getElementById("username-"+i.toString()), 
+            document.getElementById("points-"+i.toString())
+        ])
+        
+    }
+    setInterval(updateLeaderboard, 250)
     // Set up collision detection for point scoring
     function collision(event){
         // console.log(event.pairs[0]);
@@ -48,7 +56,7 @@ function setup() {
             var peg = pair.bodyA.label == "peg" ? pair.bodyA : pair.bodyB;
             if(peg.id <= pegsPop.length){
                 pegsPop[parseInt(peg.id)-1].startPopping()
-                
+            } 
             // IF statement for collision type handling
             // Option 1 is ball and peg, Option 2 is ball and bucket
             // Check if option 1, else assume option 2
@@ -80,23 +88,7 @@ function setup() {
                 } else {
                     scoreboard[ball.username] = score;
                 }
-                // Update leaderboard
-                // Create array of all items in scoreboard in format [key, value]
-                var scores = Object.keys(scoreboard).map(function(key) {
-                    return [key, scoreboard[key]];
-                });
-                // Sort arrays based on second element (value)
-                scores.sort(function(first, second) {
-                    return second[1] - first[1];
-                });
-                // Create a new array with only the first 5 items (top 5 leaders)
-                leaderboard = scores.slice(0, 5);
-                // Build front end leaderboard
-                // Loop through all players in leaderboard and update username + points
-                for (i=0; i < leaderboard.length; i++){
-                    document.querySelectorAll(".player")[i].querySelector('.username').innerHTML = leaderboard[i][0];
-                    document.querySelectorAll(".player")[i].querySelector('.points').innerHTML = leaderboard[i][1];
-                }
+       
                 // Assign 'isScored' property to ball so that world can remove it from game
                 ball.isScored = true;
             }
@@ -104,6 +96,8 @@ function setup() {
 
         }
     }
+    
+
     // Assign a 'collisionStart' event in this engine to the function
     Events.on(engine, "collisionStart", collision);
     // Spawn first ball (only here so ball at very start, remove when spawning balls based on gifts)
@@ -160,8 +154,27 @@ function setup() {
     var b = new Boundary(width/2, height + 50, width, 100 );
     bounds.push(b);
     
+    
 }
-
+function updateLeaderboard(){
+    // Update leaderboard
+    // // Create array of all items in scoreboard in format [key, value]
+    var scores = Object.keys(scoreboard).map(function(key) {
+        return [key, scoreboard[key]];
+    });
+    // // Sort arrays based on second element (value)
+    scores.sort(function(first, second) {
+        return second[1] - first[1];
+    });
+    // // Create a new array with only the first 5 items (top 5 leaders)
+    leaderboard = scores.slice(0, 5);
+    // // Build front end leaderboard
+    // // Loop through all players in leaderboard and update username + points
+    for (i=0; i < leaderboard.length; i++){
+        leaderboardElements[i][0].innerHTML = leaderboard[i][0];
+        leaderboardElements[i][1].innerHTML = leaderboard[i][1];
+    }
+}
 function getRandomFloat(min, max, decimals) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);
   
@@ -170,14 +183,9 @@ function getRandomFloat(min, max, decimals) {
 
 // Function spawns a new ball
 
-function addBallToBuffer(profilePictureUrl){
+function addBallToBuffer(profilePictureUrl, username){
     var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16, profilePictureUrl, mask);
 
-//function addBallToBuffer(){
-    // var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), 10, 16);
-    //var p = new Ball((width/2) + getRandomFloat(-10, 10, 2), -30, 16);
-    // Add username to ball (randomly selecting between 5 players for testing)
-    // p.body.username = randPlayers[getRandomFloat(0,4,0)];
     // p.body.username = userId;
 
     // push the new ball into ball array
@@ -194,8 +202,8 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 2 == 0) {
-        // addBallToBuffer();
+    if (frameCount % 4 == 0) {
+        addBallToBuffer();
         newBall()
     }
     background(28,45,55);

@@ -12,7 +12,7 @@ class Ball{
             },
         }
         // Create particle
-        this.body = Bodies.circle(x,y,r, options);
+        this.body = Bodies.circle(x,y,r, options)
         // Set object ID for collision detection
         this.body.label = "ball";
         // set collision properties
@@ -30,7 +30,7 @@ class Ball{
     isOffScreen() {
         var x = this.body.position.x;
         var y = this.body.position.y;
-        return (x < -50 || x > width + 50 || y > height-300);
+        return (x < -50 || x > width + 50 || y > height-50);
     }
     loadImage(){
         if(this.img == null && this.profilePictureUrl){
@@ -52,8 +52,8 @@ class Ball{
             return
         }else {
             this.loadImage()
-            this.mask.ellipse(pos.x, pos.y, this.r)
-            this.img.mask(this.mask)
+            // this.mask.ellipse(pos.x, pos.y, this.r)
+            // this.img.mask(this.mask)
             image(this.img, pos.x-this.r, pos.y-this.r, 2*this.r, 2*this.r)
         }
     }

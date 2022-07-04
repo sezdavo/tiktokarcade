@@ -29,7 +29,7 @@ function addBallFromLike({userId, nickname, profilePictureUrl}){
         cooldown[userId] = now
 
         console.log("Adding new ball for " + nickname)
-        addBallToBuffer(profilePictureUrl || null)
+        addBallToBuffer(profilePictureUrl || null, nickname || userId)
 
         // cleanCooldown()
     }else{
@@ -37,9 +37,9 @@ function addBallFromLike({userId, nickname, profilePictureUrl}){
     }
 }
 
-function addBallFromGift({userId, giftId, diamondCount, profilePictureUrl}){
+function addBallFromGift({userId, giftId, diamondCount, nickname, profilePictureUrl}){
     for (let i = 0; i < diamondCount; i++) {
-       addBallToBuffer(profilePictureUrl || null) 
+       addBallToBuffer(profilePictureUrl || null, nickname || userId ) 
     }
 }
 
