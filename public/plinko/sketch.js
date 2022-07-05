@@ -83,7 +83,10 @@ function setup() {
                 // grab ball
                 var ball = pair.bodyA.label == "ball" ? pair.bodyA : pair.bodyB;
                 // Get bucket IDs for monitoring distribution
+
+
                 var idx = bucket.id - bucketIDs[0];
+                buckets[idx].jiggle();
                 bucketCounters[idx] += 1;
                 // Use values to calculate score
                 var score = bucket.value;
@@ -227,8 +230,8 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 3 == 0) {
-        // addBallToBuffer();
+    if (frameCount % 20 == 0) {
+        addBallToBuffer();
         newBall()
     }
     background(28,45,55);
@@ -254,7 +257,7 @@ function draw() {
     // Draw buckets into world
     for (var i = 0; i < buckets.length; i++) {
         // bucketsPop[i].pop(frameCount);
-        buckets[i].show();
+        buckets[i].show(frameCount);
     }
     // Draw boundaries into world
     // The boundaries should help stop a ball triggering multiple buckets
