@@ -93,12 +93,12 @@ a {
 .game-canvas {
     width: 750px;
     height: 650px;
+    position: relative;
 }
 .notification-banner{
     width: 750px;
     height: 100px;
     background-color: #1c2d37;
-    padding-top: 15px;
 
 }
 .notification{
@@ -108,10 +108,12 @@ a {
     border-radius: 35px;
     text-align: center;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
     color: white;
     margin: 0 auto;
-    padding-left: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
 }
 .chat-background {
     width: 750px;
@@ -174,4 +176,15 @@ td.points {
     width: 750px;
     height:100px;
     background-color: #1c2d37;
+}
+
+.free-plays{
+    height: 200px;
+    width: 200px;
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 2;
+    position: absolute;
+    color: white;
+
 }
