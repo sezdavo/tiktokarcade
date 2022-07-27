@@ -16,6 +16,7 @@ const io = new Server(httpServer, {
     }
 });
 
+
 io.on('connection', (socket) => {
     let tiktokConnectionWrapper;
 
@@ -24,14 +25,17 @@ io.on('connection', (socket) => {
     socket.on('setUniqueId', (uniqueId, options) => {
 
         // Prohibit the client from specifying these options (for security reasons)
-        if (typeof options === 'object') {
+        if (typeof options === 'object' && options) {
             delete options.requestOptions;
             delete options.websocketOptions;
+        } else {
+            options = {};
         }
 
-        // Is the client already connected to a stream? => Disconnect
-        if (tiktokConnectionWrapper) {
-            tiktokConnectionWrapper.disconnect();
+        // Session ID in .env file is optional
+        if (process.env.SESSIONID) {
+            options.sessionId = process.env.SESSIONID;
+            console.info('Using SessionId');
         }
 
         // Check if rate limit exceeded
@@ -42,7 +46,7 @@ io.on('connection', (socket) => {
 
         // Connect to the given username (uniqueId)
         try {
-            tiktokConnectionWrapper = new TikTokConnectionWrapper(uniqueId, options, true);
+            tiktokConnectionWrapper = new TikTokConnectionWrapper(uniqueId, options, true, process.env.WEBCAST_COOKIES);
             tiktokConnectionWrapper.connect();
         } catch (err) {
             socket.emit('tiktokDisconnected', err.toString());
@@ -69,6 +73,7 @@ io.on('connection', (socket) => {
         tiktokConnectionWrapper.connection.on('liveIntro', msg => socket.emit('liveIntro', msg));
         tiktokConnectionWrapper.connection.on('emote', msg => socket.emit('emote', msg));
         tiktokConnectionWrapper.connection.on('envelope', msg => socket.emit('envelope', msg));
+        tiktokConnectionWrapper.connection.on('subscribe', msg => socket.emit('subscribe', msg));
     });
 
     socket.on('disconnect', () => {

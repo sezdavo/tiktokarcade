@@ -2,7 +2,7 @@
  * Wrapper for client-side TikTok connection over Socket.IO
  * With reconnect functionality.
  */
-class TikTokIOConnection {
+ class TikTokIOConnection {
     constructor(backendUrl) {
         this.socket = io(backendUrl);
         this.uniqueId = null;

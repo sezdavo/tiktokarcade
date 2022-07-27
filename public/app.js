@@ -10,6 +10,8 @@ let likeCount = 0;
 let diamondsCount = 0;
 let cooldown = {}
 let cooldownPeriod = 15 * 1000;
+if (!window.settings) window.settings = {};
+
 $(document).ready(() => {
     $('#connectButton').click(connect);
     $('#uniqueIdInput').on('keyup', function (e) {
@@ -17,6 +19,7 @@ $(document).ready(() => {
             connect();
         }
     });
+    if (window.settings.username) connect();
 })
 
 function cleanCooldown(now){
@@ -45,7 +48,7 @@ function addBallFromGift({userId, giftId, diamondCount, nickname, profilePicture
 }
 
 function connect() {
-    let uniqueId = $('#uniqueIdInput').val();
+    let uniqueId = window.settings.username || $('#uniqueIdInput').val()
     if (uniqueId !== '') {
 
         $('#stateText').text('Connecting...');
@@ -63,6 +66,12 @@ function connect() {
 
         }).catch(errorMessage => {
             $('#stateText').text(errorMessage);
+            // schedule next try if obs username set
+            if (window.settings.username) {
+                setTimeout(() => {
+                    connect(window.settings.username);
+                }, 30000);
+            }
         })
 
     } else {
@@ -223,4 +232,9 @@ connection.on('social', (data) => {
 
 connection.on('streamEnd', () => {
     $('#stateText').text('Stream ended.');
+    if (window.settings.username) {
+        setTimeout(() => {
+            connect(window.settings.username);
+        }, 30000);
+    }
 })
