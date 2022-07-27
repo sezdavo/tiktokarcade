@@ -38,6 +38,7 @@ function addBallFromLike({userId, nickname, profilePictureUrl}){
 }
 
 function addBallFromGift({userId, giftId, diamondCount, nickname, profilePictureUrl}){
+    console.log(userId)
     for (let i = 0; i < diamondCount; i++) {
        addBallToBuffer(profilePictureUrl || null, nickname || userId ) 
     }

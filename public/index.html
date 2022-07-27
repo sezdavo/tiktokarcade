@@ -33,68 +33,47 @@
 </head>
 
 <body>
-    <div class="head">
-        <h1>TikTok LIVE Chat Reader Plinko</h1>
-        <span class="subTitle">Source: <a
-                href="https://github.com/zerodytrash/TikTok-Chat-Reader">https://github.com/zerodytrash/TikTok-Chat-Reader</a></span>
-    </div>
-
-    <div>
-        A chat reader for <a href="https://www.tiktok.com/live">TikTok LIVE</a> utilizing <a
-            href="https://github.com/zerodytrash/TikTok-Live-Connector">TikTok-Live-Connector</a> and <a
-            href="https://socket.io/">Socket.IO</a> to forward the data to the client.
-    </div>
-
-    <div class="inputFields">
-        <p>Enter the <b>@username</b> of a user who is currently live:</p>
-        <input type="text" id="uniqueIdInput">
-        <input type="button" id="connectButton" value="connect">
-    </div>
-    <div>
-
-    </div>
-    <table class="splitstatetable">
-        <tr>
-            <td>
-                <pre id="stateText"></pre>
-            </td>
-            <td>
-                <div id="roomStats"></div>
-            </td>
-        </tr>
-    </table>
-
-    <table class="splitchattable">
-        <tr>
-            <td>
-                <div class="chatcontainer">
-                    <h3 class="containerheader">Chats</h3>
-                </div>
-            </td>
-            <td>
-                <div class="giftcontainer">
-                    <h3 class="containerheader">Gifts</h3>
-                </div>
-            </td>
-        </tr>
-    </table>
     <div class="phone-screen">
-        <h1>Streaming Window:</h1>
         <div class="top-banner">
-            Top Banner
         </div>
         <div id="game-canvas">
             <div class="free-plays">
-                FREE PLAYS
+                Free Plays &#127873;
+                <table class="free">
+                    <tr class="menu">
+                        <td class="cost">
+                            10
+                        </td>
+                        <td id="heart">
+                            <img src="images/tiktokheart.png" alt="" border=0 height=40 width=40></img>
+                        </td>
+                    </tr>
+                </table>
+                <div class="limit">
+                    (1/min)
+                </div>
+            </div>
+            <div class="gift-plays">
+                Gift <br/> Plays &#129297;
+                <table class="free">
+                    <tr class="menu">
+                        <td class="cost">
+                            1
+                        </td>
+                        <td id="heart">
+                            <img src="images/tiktokcoin.png" alt="" border=0 height=40 width=40></img>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="notification-banner">
             <div class="notification">
-                *insert notification here*
+                Follow @arcade.live for more!
             </div>
         </div>
         <div class="chat-background">
-            Chat Background
+            <!-- Chat Background -->
 
             <div class="leaderboard">
                 <div class="leaderboard-title">
@@ -162,9 +141,54 @@
             </div>
         </div>
         <div class="bottom-banner">
-            Bottom Banner
+            <!-- Bottom Banner -->
         </div>
     </div>
+    <div class="head">
+        <h1>TikTok LIVE Chat Reader Plinko</h1>
+        <span class="subTitle">Source: <a
+                href="https://github.com/zerodytrash/TikTok-Chat-Reader">https://github.com/zerodytrash/TikTok-Chat-Reader</a></span>
+    </div>
+
+    <div>
+        A chat reader for <a href="https://www.tiktok.com/live">TikTok LIVE</a> utilizing <a
+            href="https://github.com/zerodytrash/TikTok-Live-Connector">TikTok-Live-Connector</a> and <a
+            href="https://socket.io/">Socket.IO</a> to forward the data to the client.
+    </div>
+
+    <div class="inputFields">
+        <p>Enter the <b>@username</b> of a user who is currently live:</p>
+        <input type="text" id="uniqueIdInput">
+        <input type="button" id="connectButton" value="connect">
+    </div>
+    <div>
+
+    </div>
+    <table class="splitstatetable">
+        <tr>
+            <td>
+                <pre id="stateText"></pre>
+            </td>
+            <td>
+                <div id="roomStats"></div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="splitchattable">
+        <tr>
+            <td>
+                <div class="chatcontainer">
+                    <h3 class="containerheader">Chats</h3>
+                </div>
+            </td>
+            <td>
+                <div class="giftcontainer">
+                    <h3 class="containerheader">Gifts</h3>
+                </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
 

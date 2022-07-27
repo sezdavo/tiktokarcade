@@ -46,7 +46,7 @@ function setup() {
 
     for (let i = 0; i < 5; i++) {
         leaderboardElements.push([
-            document.getElementById("username-"+i.toString()), 
+            document.getElementById("username-"+i.toString().replace(/[\r\n]/gm, '')), 
             document.getElementById("points-"+i.toString())
         ])
         
@@ -230,8 +230,8 @@ function newBall(){
 }
 function draw() {
     // Spawn new particle every 60 frames (~2seconds)
-    if (frameCount % 20 == 0) {
-        addBallToBuffer();
+    if (frameCount % 1 == 0) {
+        // addBallToBuffer();
         newBall()
     }
     background(28,45,55);
